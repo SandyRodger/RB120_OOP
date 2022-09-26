@@ -1,0 +1,13 @@
+=begin
+
+https://launchschool.com/exercises/ce73d7fc
+
+Using the code from the previous exercise, create an instance of Cat and assign it to a variable named kitty.
+
+=end
+
+class Cat
+end
+
+kitty = Cat.new
+p kitty
