@@ -243,15 +243,73 @@ p bob.name
 
 # 11.
 
-  class Animal    def eat     puts "I eat."    end   end      class Fish < Animal    def eat     puts "I eat plankton."    end   end      class Dog < Animal    def eat      puts "I eat kibble."    end   end      def feed_animal(animal)    animal.eat   end      array_of_animals = [Animal.new, Fish.new, Dog.new]   array_of_animals.each do |animal|    feed_animal(animal)   end  
+```ruby
+class Animal
+  def eat
+    puts "I eat."
+  end
+end
 
- 
+class Fish < Animal
+  def eat
+    puts "I eat plankton."
+  end
+end
+
+class Dog < Animal
+  def eat
+     puts "I eat kibble."
+  end
+end
+
+def feed_animal(animal)
+  animal.eat
+end
+
+array_of_animals = [Animal.new, Fish.new, Dog.new]
+array_of_animals.each do |animal|
+  feed_animal(animal)
+end
+
+```
+
+ Ls
 
 \# What is output and why? How does this code demonstrate polymorphism? 
 
 # 12.
 
-  class Person    attr_accessor :name, :pets       def initialize(name)     @name = name     @pets = []    end   end      class Pet    def jump     puts "I'm jumping!"    end   end      class Cat < Pet; end      class Bulldog < Pet; end      bob = Person.new("Robert")      kitty = Cat.new   bud = Bulldog.new      bob.pets << kitty   bob.pets << bud                  bob.pets.jump   
+```ruby
+class Person
+  attr_accessor :name, :pets
+
+  def initialize(name)
+    @name = name
+    @pets = []
+  end
+end
+
+class Pet
+  def jump
+    puts "I'm jumping!"
+  end
+end
+
+class Cat < Pet; end
+
+class Bulldog < Pet; end
+
+bob = Person.new("Robert")
+
+kitty = Cat.new
+bud = Bulldog.new
+
+bob.pets << kitty
+bob.pets << bud                     
+
+bob.pets.jump 
+
+```
 
  
 
@@ -261,7 +319,25 @@ p bob.name
 
 # 13.
 
-  class Animal    def initialize(name)     @name = name    end   end      class Dog < Animal    def initialize(name); end       def dog_name     "bark! bark! #{@name} bark! bark!"    end   end      teddy = Dog.new("Teddy")   puts teddy.dog_name    
+```ruby
+class Animal
+  def initialize(name)
+    @name = name
+  end
+end
+
+class Dog < Animal
+  def initialize(name); end
+
+  def dog_name
+    "bark! bark! #{@name} bark! bark!"
+  end
+end
+
+teddy = Dog.new("Teddy")
+puts teddy.dog_name   
+
+```
 
  
 
@@ -271,7 +347,19 @@ p bob.name
 
 # 14.
 
-  class Person    attr_reader :name       def initialize(name)     @name = name    end   end      al = Person.new('Alexander')   alex = Person.new('Alexander')   p al == alex # => true  
+```ruby
+class Person
+  attr_reader :name
+
+  def initialize(name)
+    @name = name
+  end
+end
+
+al = Person.new('Alexander')
+alex = Person.new('Alexander')
+p al == alex # => true
+```
 
  
 
@@ -307,7 +395,31 @@ p bob.name
 
 # 18. 
 
-  class Shape    @@sides = nil       def self.sides     @@sides    end       def sides     @@sides    end   end      class Triangle < Shape    def initialize     @@sides = 3    end   end      class Quadrilateral < Shape    def initialize     @@sides = 4    end   end  
+```ruby
+class Shape
+  @@sides = nil
+
+  def self.sides
+    @@sides
+  end
+
+  def sides
+    @@sides
+  end
+end
+
+class Triangle < Shape
+  def initialize
+    @@sides = 3
+  end
+end
+
+class Quadrilateral < Shape
+  def initialize
+    @@sides = 4
+  end
+end
+```
 
  
 
