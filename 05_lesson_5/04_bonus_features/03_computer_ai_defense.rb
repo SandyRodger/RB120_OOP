@@ -143,6 +143,28 @@ class TTTGame
 
   private
 
+	def computer_places_piece!(brd)
+		square = nil
+		Board::WINNING_LINES.each do |line|
+			square = find_at_risk_square(line, brd)
+			break if square
+		end
+	
+		if !square
+			square = empty_squares(brd).sample
+		end
+	
+		brd[square] = COMPUTER_MARKER
+	end
+
+	def find_at_risk_square(line, board)
+		if board.values_at(*line).count(PLAYER_MARKER) == 2
+			board.select{|k,v| line.include?(k) && v == INITIAL_MARKER}.keys.first
+		else
+			nil
+		end
+	end
+
 	def five_wins?
 		@human_five_wins || @computer_five_wins
 	end
@@ -230,7 +252,7 @@ class TTTGame
       human_moves
       @current_marker = COMPUTER_MARKER
     else
-      computer_moves
+      computer_places_piece!(board)
       @current_marker = HUMAN_MARKER
     end
   end
