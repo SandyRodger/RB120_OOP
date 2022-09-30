@@ -98,12 +98,16 @@ class TTTGame
   FIRST_TO_MOVE = HUMAN_MARKER
 
   attr_reader :board, :human, :computer
+	attr_accessor :human_wins, :computer_wins, :five_wins
 
   def initialize
     @board = Board.new
     @human = Player.new(HUMAN_MARKER)
     @computer = Player.new(COMPUTER_MARKER)
     @current_marker = FIRST_TO_MOVE
+		@human_wins = 0
+		@computer_wins = 0
+		@five_wins = false
   end
 
   def play
@@ -120,7 +124,7 @@ class TTTGame
       end
 
       display_result
-      break unless play_again?
+      break unless play_again? || five_wins?
       reset
       display_play_again_message
     end
@@ -130,6 +134,19 @@ class TTTGame
 
   private
 
+	def tally_score(marker)
+		case marker
+		when HUMAN_MARKER
+			@human_wins += 1
+			@five_wins = true if @human_wins == 5
+		when COMPUTER_MARKER
+			@computer_wins += 1
+			@five_wins = true if @computer_wins == 5
+		end
+		puts "It's now #@human_wins to you, #@computer_wins to the computer!"
+		[@human_wins, @computer_wins]
+	end
+	
   def display_welcome_message
     puts "Welcome to Tic Tac Toe!"
     puts ""
@@ -140,7 +157,7 @@ class TTTGame
   end
 
   def clear_screen_and_display_board
-    clear
+    clear 
     display_board
   end
 
@@ -199,8 +216,10 @@ class TTTGame
     case board.winning_marker
     when human.marker
       puts "You won!"
+			tally_score(HUMAN_MARKER)
     when computer.marker
       puts "Computer won!"
+			tally_score(COMPUTER_MARKER)
     else
       puts "It's a tie!"
     end
