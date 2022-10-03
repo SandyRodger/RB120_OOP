@@ -5,9 +5,9 @@ class Person
     @name = name
   end
 
-  def to_s
-    "My name is #{name.upcase!}."
-  end
+  # def to_s
+  #   "My name is #{name.upcase!}."
+  # end
 end
 
 bob = Person.new('Bob')

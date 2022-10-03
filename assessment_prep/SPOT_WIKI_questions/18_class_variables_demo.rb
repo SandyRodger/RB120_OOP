@@ -1,5 +1,6 @@
 class Shape
   @@sides = nil
+	@can_i_be_inherited = 1
 
   def self.sides
     @@sides
@@ -14,6 +15,10 @@ class Triangle < Shape
   def initialize
     @@sides = 3
   end
+
+	def test
+		p @can_i_be_inherited
+	end
 end
 
 class Quadrilateral < Shape
@@ -22,7 +27,7 @@ class Quadrilateral < Shape
   end
 end
 
-
+Triangle.new.test
 =begin
 
 What can executing `Triangle.sides` return? 
