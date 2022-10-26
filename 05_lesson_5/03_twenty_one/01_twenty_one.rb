@@ -6,279 +6,349 @@ https://launchschool.com/lessons/97babc46/assignments/819bf113
 require 'byebug'
 require 'colorize'
 
-module Common_Methods
-	def brief_pause
-		sleep 2
-	end
+module Formatable
+  def brief_pause
+    sleep 0.5
+  end
 
-	def question_and_answer(question)
-		puts question
-		answer = gets.chomp.capitalize
-	end
+  def print_and_pause(text)
+    puts text
+    brief_pause
+  end
+
+  def question_and_answer(question)
+    print_and_pause(question)
+    gets.chomp.capitalize
+  end
 end
 
 class Deck
-	SUITS = ['Hearts', 'Diamonds', 'Spades', 'Clubs']
-	VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace']
+  SUITS = ['Hearts', 'Diamonds', 'Spades', 'Clubs']
+  VALUES = ("2".."10").to_a + ['Jack', 'Queen', 'King', 'Ace']
 
-	attr_reader :cards
+  attr_reader :cards
 
-	include Common_Methods
-	
+  include Formatable
+
   def initialize
-		@cards = self.create
+    @cards = create
   end
-
-	def write_cards
-		SUITS.product(VALUES).shuffle
-	end 
-
-	def new_card(player)
-		new_card = nil
-			loop do
-				new_card = self.cards.sample
-				break if !player.cards.include?(new_card)
-			end
-			new_card
-	end
-
-	def create
-		card_data =	self.write_cards
-		card_data.each_with_object([]) do |card_data, deck_arr|
-			deck_arr << Card.new(card_data)
-		end
-	end
 
   def deal_a_card
-			@cards.sample
+    cards.sample
   end
 
-	def deal_two_cards(player)
-		puts "Dealer gives #{player.name} 2 cards..."
-		brief_pause
-		2.times do 
-			player.cards << deal_a_card
-		end
-	end
+  def deal_two_cards(player)
+    print_and_pause "Dealer gives #{player.name} 2 cards..."
+    2.times { player.cards << deal_a_card }
+  end
 
+  private
+
+  def write_cards
+    SUITS.product(VALUES).shuffle
+  end
+
+  def new_card(player)
+    loop do
+      new_card = cards.sample
+      return new_card unless player.cards.include?(new_card)
+    end
+  end
+
+  def create
+    write_cards.each_with_object([]) { |card, arr| arr << Card.new(card) }
+  end
 end
 
-class Game < Deck
-	attr_reader :deck, :current_player
-	attr_accessor :human_player, :computer_player
+class Game
+  attr_reader :deck, :current_player
+  attr_accessor :human_player, :dealer_player, :player_won
 
-	TURN_ENDING_RESULTS = ["bust","stay","win"]
+  include Formatable
 
-	include Common_Methods
-	
-	def initialize
-		@deck = Deck.new
-		@human_player = Player.new("Human", "player")
-		@computer_player = Player.new("Computer", "dealer", false)
-		@current_player = @human_player
-	end
+  def initialize
+    @deck = Deck.new
+    @human_player = Player.new("Human")
+    @dealer_player = Player.new("Dealer", false)
+    @current_player = @human_player
+    @player_won = false
+  end
 
   def start
-		welcome_message
-		main_game
-		final_message
-	end
-
-	def welcome_message
-		brief_pause
-		puts "Welcome to Twenty One!".red
-		human_player.ask_name
-		brief_pause
-		computer_player.ask_name
-	end
-
-	def main_game
-		result = nil
-		deck.deal_two_cards(human_player)
-		brief_pause
-		deck.deal_two_cards(computer_player)
-		initial_show_cards
-		loop do
-			loop do
-				result = current_player.take_turn(deck)
-				if current_player.got_exactly_21?
-					puts "#{current_player.name} has got exactly 21!"
-					return "win"
-				end
-				break if TURN_ENDING_RESULTS.include?(result)
-			end
-			break if ["win","bust"].include?(result)
-			change_player
-			break if both_players_played?
-		end
-		compare_hands
-	end
-
-	def compare_hands
-		if ((computer_player.total > human_player.total) && (computer_player.total < 22))
-			puts "#{computer_player.name} has beaten you!"
-		elsif human_player.busted?
-			puts "in a sense #{human_player.name}, you have beaten yourself"
-		else
-			puts "#{human_player.name} wins!"
-		end
-	end
-
-	def change_player
-		current_player.is_human ? @current_player = @computer_player : @current_player = @human_player
-	end
-
-	def final_score
-		"Human: #{human_player.total} , Computer #{computer_player.total}"
-	end
-
-	def final_message
-		puts final_score
-		puts "Thank you for playing. Bye!"
-	end
-
-	def both_players_played?
-		!@computer_player.cards.empty? && !@human_player.cards.empty?
-	end
-
-	def initial_show_cards
-		computer_card = computer_player.cards.map do |card|
-			[card.value, card.suit]
-		end
-		human_player.show_cards
-		puts "#{computer_player.name} has a #{computer_card[0][0]} of #{computer_card[0][1]} and something else"
-	end
-end
-
-class Player < Game
-	attr_accessor :cards, :total, :name
-	attr_reader :is_human
-
-	include Common_Methods 
-
-	def initialize(name, role, is_human=true)
-		@name = name
-		@role = role
-		@cards = []
-		@total = 0
-		@is_human = is_human
-	end
-	
-	def ask_name
-		self.name = question_and_answer("What is #{self.name}'s name?")
-		if self.is_human 
-			self.name = self.name.blue
-		else
-			self.name = self.name.yellow
-		end
-	end
-
-	def take_turn(deck)
-		loop do
-			if self.busted?
-				self.busted_message
-				return "bust"
-			end
-			case self.hit_or_stay
-				when "hit"
-					puts "#{self.name} hit."
-					brief_pause
-					self.cards << deck.deal_a_card
-					self.show_cards
-					return "hit"
-				when "stay"
-					return "stay"
-			end
-		end
-	end
-
-	def got_exactly_21?
-		self.total == 21
-	end
-
-  def busted?
-		self.total > 21
+    welcome_message
+    main_game
+    final_message
   end
 
-	def busted_message 
-		puts "#{self.name}'s score has exceeded 21. That is a bust"
-	end
+  private
 
-	def winning_message
-		puts "you got 21 exactly, well done!"
-	end
+  def welcome_message
+    print_and_pause "Welcome to Twenty One!"
+    human_player.ask_name
+    dealer_player.ask_name
+  end
 
-	def hit_or_stay_human
-		loop do
-			case question_and_answer("hit(1) or stay(2)?")
-			when "1"
-				brief_pause
-				return "hit"
-			when "2"
-				brief_pause
-				return "stay"
-			else
-				puts "invalid input"
-			end
-		end
-	end
+  def main_game
+    loop do
+      initial_deal
+      make_test_hand
+      twenty_one_protocol if players_turn == "21"
+      compare_hands(dealer_player.total, human_player.total)
+      final_score
+      break unless play_again?
+      reset_game
+    end
+  end
 
-	def show_cards
-		puts "#{self.name} has #{self.cards.map do |card|
-				"a #{card.value} of #{card.suit}"
-			end.join(", ")}"
-		puts "This scores as #{self.total}"
-	end
+  def make_test_hand
+    fake_cards = [Card.new(["Spades", "Ace"]), Card.new(["Hearts", "Ace"])]
+    human_player.cards = fake_cards
+  end
 
-	def hit_or_stay_computer
-		loop do
-			if self.total < 17
-				brief_pause
-				return "hit"
-			else 
-				brief_pause
-				return "stay"
-			end
-		end
-	end
+  def twenty_one_protocol
+    @player_won = true
+    exactly_twenty_one_message
+  end
 
-	def hit_or_stay
-		if self.is_human
-			hit_or_stay_human
-		else
-			hit_or_stay_computer
-		end
-	end
+  def players_turn
+    loop do
+      announce_turn
+      return "21" if player_choice == "21"
+      return "busted" if current_player.busted?
+      @current_player = change_player
+      break if both_players_played?
+    end
+  end
 
-	def ace?(card_symbol)
-		card_symbol == "Ace"
-	end
-	
-	def face_card?(card_symbol)
-		card_symbol.to_i == 0
-	end
-	
-  def total
-		sum = 0
-		@cards.map {|card| card.value}.each do |card_symbol|
-			if ace?(card_symbol)
-				sum += 11
-			elsif face_card?(card_symbol) # J, Q, K
-				sum += 10
-			else
-				sum += card_symbol.to_i
-			end
-		end
-		sum
+  def player_choice
+    loop do
+      result = current_player.take_turn(deck)
+      return "21" if result == "21"
+      return result if result != "hit"
+    end
+  end
+
+  def initial_deal
+    deck.deal_two_cards(human_player)
+    deck.deal_two_cards(dealer_player)
+    dealer_player.show_a_card
+  end
+
+  def exactly_twenty_one_message
+    print_and_pause "#{current_player.name} got 21 exactly, well done!"
+  end
+
+  def play_again?
+    loop do
+      answer = question_and_answer("Would you like to play again? (y/n)")
+      return true if answer  == "Y"
+      return false if answer == "N"
+      print_and_pause "invalid input, try again."
+    end
+  end
+
+  def announce_turn
+    print_and_pause "#{current_player.name}'s turn:"
+  end
+
+  def reset_game
+    @human_player.reset
+    @dealer_player.reset
+    @current_player = @human_player
+  end
+
+  def compare_hands(c, h)
+    if c == h
+      print_and_pause "It's a tie!"
+    elsif (c > h && c < 22) || h > 21
+      print_and_pause "#{dealer_player.name} wins!"
+    else
+      print_and_pause "#{human_player.name} wins!"
+    end
+  end
+
+  def change_player
+    current_player.is_human ? @dealer_player : @human_player
+  end
+
+  def final_score
+    print_and_pause "Human: #{human_player.total}"
+    print_and_pause "Dealer: #{dealer_player.total}"
+  end
+
+  def final_message
+    print_and_pause "Thank you for playing. Bye!"
+  end
+
+  def both_players_played?
+    @dealer_player.played && @human_player.played
   end
 end
 
 class Card
-	attr_reader :suit, :value
+  attr_reader :suit
+  attr_accessor :value
 
   def initialize(card_data)
     @suit = card_data[0]
-		@value = card_data[1]
+    @value = card_data[1]
+  end
+end
+
+class Player < Card
+  attr_accessor :cards, :name, :played
+  attr_reader :is_human
+
+  include Formatable
+
+  def initialize(name, is_human=true)
+    @name = name
+    @cards = []
+    @total = 0
+    @is_human = is_human
+    @played = false
+  end
+
+  def show_a_card
+    cards.map do |card|
+      print_and_pause "#{name} has a #{card.value} and an unknown card"
+      break
+    end
+  end
+
+  def ask_name
+    new_name = question_and_answer("What is #{name}'s name?")
+    @name = is_human ? new_name.blue : new_name.yellow
+  end
+
+  def reset
+    @cards = []
+    @played = false
+  end
+
+  def take_turn(deck)
+    @played = true
+    show_cards
+    return check_for_bust if busted?
+    return "21" if got_exactly_21?
+    action = hit_or_stay
+    return hit_protocol(deck) if action == "hit"
+    return stay_protocol if action == "stay"
+  end
+
+  def check_for_bust
+    if busted? && hand_contains_high_ace?
+      @total = recalculate_total
+      recalculate_message
+    elsif busted?
+      busted_message
+    end
+  end
+
+  def recalculate_message
+    print_and_pause "Your score has exceeded 21..."
+    print_and_pause "we're now valuing an Ace as 1 instead of 11"
+    total == "21" ? (return "21") : (return "hit")
+  end
+
+  def recalculate_total
+    ace = cards.select { |c| c.value == "Ace" }
+    ace[0].value = "(low) ace"
+    @total = total
+  end
+
+  def hand_contains_high_ace?
+    cards.map(&:value).include?("Ace")
+  end
+
+  def stay_protocol
+    print_and_pause "#{name} stayed."
+    "stay"
+  end
+
+  def hit_protocol(deck)
+    print_and_pause "#{name} hit."
+    cards << deck.deal_a_card
+    "hit"
+  end
+
+  def got_exactly_21?
+    total == 21
+  end
+
+  def busted?
+    total > 21
+  end
+
+  def busted_message
+    print_and_pause "#{name}'s score has exceeded 21."
+    "bust"
+  end
+
+  def show_cards
+    print_and_pause "#{name} has #{cards.map do |card|
+			                                  "a #{card.value} of #{card.suit}"
+		                                 end.join(', ')}"
+    print_and_pause "This scores as #{total}"
+  end
+
+  def ace?(card_symbol)
+    card_symbol == "Ace" || card_symbol == "(low) ace"
+  end
+
+  def face_card?(card_symbol)
+    card_symbol.to_i == 0
+  end
+
+  def total
+    cards.map(&:value).map do |card_symbol|
+      if ace?(card_symbol)
+        ace_value(card_symbol)
+      elsif face_card?(card_symbol)
+        10
+      else
+        card_symbol.to_i
+      end
+    end.sum
+  end
+
+  private
+
+  def ace_value(card_symbol)
+    return 11 if card_symbol == "Ace"
+    1
+  end
+
+  def low_ace?(symbol)
+    symbol == "(low) ace"
+  end
+
+  def hit_or_stay
+    is_human ? hit_or_stay_human : hit_or_stay_dealer
+  end
+
+  def hit_or_stay_human
+    loop do
+      case question_and_answer("hit(1) or stay(2)?")
+      when "1"
+        return "hit"
+      when "2"
+        return "stay"
+      else
+        print_and_pause "invalid input"
+      end
+    end
+  end
+
+  def hit_or_stay_dealer
+    if total < 17
+      print_and_pause "because the points add up to less than 17..."
+      "hit"
+    else
+      print_and_pause "because the points add up to 17 or more..."
+      "stay"
+    end
   end
 end
 
