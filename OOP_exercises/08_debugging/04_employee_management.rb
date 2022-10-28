@@ -69,9 +69,11 @@ class Employee
     "Serial No: #{abbreviated_serial_number}"
   end
 
+	protected
+	
+	attr_reader :serial_number
+	
   private
-
-  attr_reader :serial_number
 
   def abbreviated_serial_number
     serial_number[-4..-1]
@@ -94,3 +96,15 @@ miller_contracting.remove(raul) # => Employee deleted.
 miller_contracting.add(natasha) # => Employee added.
 
 miller_contracting.display_all_employees
+
+=begin
+
+The attr_reader for serial number in line 74 was private, but needed to be public.
+
+LS discussion:
+
+Private methods can only be invoked on self. But on line 56, in Employee#==, we attempt to invoke serial_number on an object that is not the current instance (other).
+
+In order to make this work, we can make serial_number a protected method. Recall that from outside the class, protected methods work just like private methods. From inside the class, however, protected methods are accessible and may be invoked with an explicit caller.
+
+=end

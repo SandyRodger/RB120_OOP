@@ -83,6 +83,12 @@ class Game
 
   private
 
+  def reset
+    @human_player.reset
+    @dealer_player.reset
+    @current_player = @human_player
+  end
+
   def welcome_message
     print_and_pause "Welcome to Twenty One!"
     human_player.ask_name
@@ -92,17 +98,17 @@ class Game
   def main_game
     loop do
       initial_deal
-      make_test_hand
-      twenty_one_protocol if players_turn == "21"
+      # insert_test_hand
+      twenty_one_protocol if turn == "21"
       compare_hands(dealer_player.total, human_player.total)
       final_score
       break unless play_again?
-      reset_game
+      reset
     end
   end
 
-  def make_test_hand
-    fake_cards = [Card.new(["Spades", "Ace"]), Card.new(["Hearts", "Ace"])]
+  def insert_test_hand
+    fake_cards = [Card.new(["Spades", "Ace"]), Card.new(["Hearts", "Jack"])]
     human_player.cards = fake_cards
   end
 
@@ -111,21 +117,13 @@ class Game
     exactly_twenty_one_message
   end
 
-  def players_turn
+  def turn
     loop do
       announce_turn
-      return "21" if player_choice == "21"
+      return "21" if current_player.choice(deck) == "21"
       return "busted" if current_player.busted?
       @current_player = change_player
       break if both_players_played?
-    end
-  end
-
-  def player_choice
-    loop do
-      result = current_player.take_turn(deck)
-      return "21" if result == "21"
-      return result if result != "hit"
     end
   end
 
@@ -150,12 +148,6 @@ class Game
 
   def announce_turn
     print_and_pause "#{current_player.name}'s turn:"
-  end
-
-  def reset_game
-    @human_player.reset
-    @dealer_player.reset
-    @current_player = @human_player
   end
 
   def compare_hands(c, h)
@@ -210,6 +202,11 @@ class Player < Card
     @played = false
   end
 
+  def ask_name
+    new_name = question_and_answer("What is #{name}'s name?")
+    @name = is_human ? new_name.blue : new_name.yellow
+  end
+
   def show_a_card
     cards.map do |card|
       print_and_pause "#{name} has a #{card.value} and an unknown card"
@@ -217,15 +214,36 @@ class Player < Card
     end
   end
 
-  def ask_name
-    new_name = question_and_answer("What is #{name}'s name?")
-    @name = is_human ? new_name.blue : new_name.yellow
+  def choice(deck)
+    loop do
+      result = take_turn(deck)
+      return "21" if result == "21"
+      return result if result != "hit"
+    end
+  end
+
+  def busted?
+    total > 21
+  end
+
+  def total
+    cards.map(&:value).map do |card_symbol|
+      if ace?(card_symbol)
+        ace_value(card_symbol)
+      elsif face_card?(card_symbol)
+        10
+      else
+        card_symbol.to_i
+      end
+    end.sum
   end
 
   def reset
     @cards = []
     @played = false
   end
+
+  private
 
   def take_turn(deck)
     @played = true
@@ -238,7 +256,7 @@ class Player < Card
   end
 
   def check_for_bust
-    if busted? && hand_contains_high_ace?
+    if busted? && high_ace_present?
       @total = recalculate_total
       recalculate_message
     elsif busted?
@@ -258,7 +276,7 @@ class Player < Card
     @total = total
   end
 
-  def hand_contains_high_ace?
+  def high_ace_present?
     cards.map(&:value).include?("Ace")
   end
 
@@ -275,10 +293,6 @@ class Player < Card
 
   def got_exactly_21?
     total == 21
-  end
-
-  def busted?
-    total > 21
   end
 
   def busted_message
@@ -300,20 +314,6 @@ class Player < Card
   def face_card?(card_symbol)
     card_symbol.to_i == 0
   end
-
-  def total
-    cards.map(&:value).map do |card_symbol|
-      if ace?(card_symbol)
-        ace_value(card_symbol)
-      elsif face_card?(card_symbol)
-        10
-      else
-        card_symbol.to_i
-      end
-    end.sum
-  end
-
-  private
 
   def ace_value(card_symbol)
     return 11 if card_symbol == "Ace"
