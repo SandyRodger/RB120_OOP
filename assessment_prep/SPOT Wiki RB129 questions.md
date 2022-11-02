@@ -5,7 +5,7 @@ class Person
   attr_reader :name
   
   def set_name
-    @name = 'Bob'
+    @name = 'Bob'		
   end
 end
 

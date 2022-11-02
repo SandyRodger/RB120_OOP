@@ -6,6 +6,8 @@ When attempting to sort an array of various lengths, we are surprised to see tha
 
 =end
 
+require 'byebug'
+
 class Length
   attr_reader :value, :unit
 
@@ -26,7 +28,15 @@ class Length
     convert_to(:nmi, { km: 1.8519993, mi: 1.15078, nmi: 1 })
   end
 
-  def ==(other)
+	def <=>(other)
+    case unit
+    when :km  then value <=> other.as_kilometers.value
+    when :mi  then value <=> other.as_miles.value
+    when :nmi then value <=> other.as_nautical_miles.value
+    end
+  end
+
+	def ==(other)
     case unit
     when :km  then value == other.as_kilometers.value
     when :mi  then value == other.as_miles.value
@@ -66,10 +76,8 @@ class Length
 end
 
 # Example
-p Length.new(1, :mi)
-p Length.new(1, :nmi)
-p Length.new(1, :km)
-# puts [Length.new(1, :mi), Length.new(1, :nmi), Length.new(1, :km)].sort
+
+puts [Length.new(1, :mi), Length.new(1, :nmi), Length.new(1, :km)].sort
 # => comparison of Length with Length failed (ArgumentError)
 # expected output:
 # 1 km
