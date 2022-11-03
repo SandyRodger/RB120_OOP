@@ -4,6 +4,8 @@ https://launchschool.com/exercises/d1b5ac33
 
 =end
 
+require 'byebug'
+
 class AuthenticationError < Exception; end
 
 # A mock search engine
@@ -25,7 +27,7 @@ class SearchEngine
 end
 
 module DoesItRock
-  API_KEY = 'LS1A'
+  API_KEY = 'LSA'
 
   class NoScore; end
 
