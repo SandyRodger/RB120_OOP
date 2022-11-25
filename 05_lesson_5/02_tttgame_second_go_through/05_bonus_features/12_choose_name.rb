@@ -124,19 +124,19 @@ end
 
 class Player
   attr_reader :marker
-	attr_accessor :name
+  attr_accessor :name
 
   def initialize(marker, name)
     @marker = marker
-		@name = name
+    @name = name
   end
 end
 
 class TTTGame
   HUMAN_MARKER = "X"
-	HUMAN_NAME = "Human"
+  HUMAN_NAME = "Human"
   COMPUTER_MARKER = "O"
-	COMPUTER_NAME = "Computer"
+  COMPUTER_NAME = "Computer"
   FIRST_TO_MOVE = HUMAN_MARKER
 
   @@computer_wins = 0
@@ -154,7 +154,7 @@ class TTTGame
   def play
     clear
     display_welcome_message
-		choose_name
+    choose_name
     main_game
     display_goodbye_message
   end
@@ -173,14 +173,14 @@ class TTTGame
     end
   end
 
-	def choose_name
-		puts "What's your name?"
-		answer = gets.chomp.capitalize
-		human.name = answer
-		puts "And what are we naming the computer?"
-		answer = gets.chomp.capitalize
-		computer.name = answer
-	end
+  def choose_name
+    puts "What's your name?"
+    answer = gets.chomp.capitalize
+    human.name = answer
+    puts "And what are we naming the computer?"
+    answer = gets.chomp.capitalize
+    computer.name = answer
+  end
 
   def five_wins?
     @@human_wins == 5 || @@computer_wins == 5
