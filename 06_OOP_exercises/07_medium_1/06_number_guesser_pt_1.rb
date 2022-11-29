@@ -79,7 +79,7 @@ class GuessingGame
 	def play
 		loop do
 			display_guesses
-			return winning_message if evaluateguess(player_guesses) == :win
+			return winning_message if evaluateguess(player_guesses)
 			return losing_message if @@guesses_remaining == 0
 		end
 	end
@@ -115,7 +115,7 @@ class GuessingGame
 			puts "Your guess is too low."
 		else
 			puts "That's the number!"
-			return :win
+			return true
 		end
 	end
 end

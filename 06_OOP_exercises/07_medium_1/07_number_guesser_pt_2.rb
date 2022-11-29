@@ -92,7 +92,62 @@ Your guess is too low.
 
 You have no more guesses. You lost!
 Note that a game object should start a new game with a new number to guess with each call to #play.
-
-
-
 =end
+
+class GuessingGame
+	attr_reader :guess, :hidden_num, :low_band, :high_band
+	attr_accessor :guesses_remaining
+
+	def initialize(low_band, high_band)
+		@low_band = low_band
+		@high_band = high_band
+		@hidden_num = Random.new.rand(@low_band..@high_band)
+		@guesses_remaining = Math.log2(high_band - low_band).to_i + 1
+	end
+
+	def play
+		loop do
+			display_guesses
+			return winning_message if evaluateguess(player_guesses)
+			return losing_message if guesses_remaining == 0
+		end
+	end
+
+	private
+
+	def display_guesses
+		puts "You have #{guesses_remaining} guesses remaining."
+	end
+
+	def player_guesses
+		loop do
+			puts "Enter a number between #{low_band} and #{high_band}:"
+			answer = gets.to_i
+			self.guesses_remaining -= 1
+			return answer if (low_band..high_band).include?(answer)
+			puts "Invalid guess"
+		end
+	end
+
+	def winning_message
+		puts "You won!"
+	end
+
+	def losing_message
+		puts "You have no more guesses. You lost!"
+	end
+
+	def evaluateguess(guess)
+		if guess > hidden_num
+			puts "Your guess is too high."
+		elsif guess < hidden_num
+			puts "Your guess is too low."
+		else
+			puts "That's the number!"
+			return true
+		end
+	end
+end
+
+game = GuessingGame.new(500,1000)
+game.play
