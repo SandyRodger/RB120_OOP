@@ -125,21 +125,12 @@ class Card
 end
 
 deck = Deck.new
-drawn = []
-52.times { drawn << deck.draw}
-p drawn.count { |card| card.rank == 5 } == 4
-p drawn.count { |card| card.suit == 'Hearts' } == 13
-
-drawn2 = []
-52.times { drawn2 << deck.draw }
-drawn != drawn2 # Almost always true
-
 # LS tests:
 
 hand = PokerHand.new(Deck.new)
 hand.print
 puts hand.evaluate
-
+=begin
 # Danger danger danger: monkey
 # patching for testing purposes.
 class Array
@@ -245,3 +236,4 @@ hand = PokerHand.new([
   Card.new(3,      'Diamonds')
 ])
 puts hand.evaluate == 'High card'
+=end
