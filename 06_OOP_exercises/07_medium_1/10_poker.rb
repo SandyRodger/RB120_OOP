@@ -14,10 +14,23 @@ require 'byebug'
 # Include Card and Deck classes from the last two exercises.
 
 class PokerHand
-  def initialize(deck)
+	attr_accessor :hand
+
+	ROYAL_FLUSH = ["Ace", "King", "Queen", "Jack", 10]
+	STANDARD_SEQUENCE = ["Ace", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King"]
+	ACE_HIGH_SEQUENCE = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King", "Ace"]
+
+  def initialize(cards)
+		if cards.is_a?(Array)
+			@hand = cards
+		else
+			@hand = []
+			5.times {hand << cards.cards.pop}
+		end
   end
 
   def print
+		puts hand
   end
 
   def evaluate
@@ -37,31 +50,82 @@ class PokerHand
 
   private
 
+	def all_one_suit?
+		hand.map{|card|card.suit}.sort == hand.map{|card|card.suit}
+	end
+
+	def ranks
+		hand.map{|card| card.rank}
+	end
+
+	def check_ranks_against(poker_hand)
+		poker_hand.map{|card_value| ranks.include? card_value }.all?(true)
+	end
+
+	def ranks_in_sequence?
+		sequence = contains_ace? ? ACE_HIGH_SEQUENCE : STANDARD_SEQUENCE
+		arr = ranks_in_sequence(sequence)
+		sequence.index(arr[0]) == (sequence.index(arr[-1]) - 4) 
+	end
+
+	def contains_ace?
+		ranks.include?("Ace")
+	end
+
+	def duplicates
+		ranks.map{|rank| ranks.count(rank)}
+	end
+
+	def ranks_in_sequence(sequence)
+		arr = []
+		sequence.each do |rank|
+			if ranks.include?(rank)
+				arr << rank
+			end
+		end
+		arr
+	end
+
   def royal_flush?
+			all_one_suit? && check_ranks_against(ROYAL_FLUSH)
   end
 
   def straight_flush?
+		all_one_suit? && ranks_in_sequence?
   end
 
   def four_of_a_kind?
+		duplicates.max == 4
   end
 
   def full_house?
+		duplicates.max == 3 && duplicates.min == 2
   end
 
   def flush?
+		all_one_suit?
   end
 
+	def no_duplicates?
+		duplicates.max == 1
+	end
+
   def straight?
+		ranks_in_sequence? && no_duplicates?
   end
 
   def three_of_a_kind?
+		duplicates.max == 3
   end
 
   def two_pair?
+		count = duplicates.count{|n|n > 1}
+		count == 4
   end
 
   def pair?
+		count = duplicates.count{|n|n > 1}
+		count == 2
   end
 end
 
@@ -130,7 +194,8 @@ deck = Deck.new
 hand = PokerHand.new(Deck.new)
 hand.print
 puts hand.evaluate
-=begin
+
+
 # Danger danger danger: monkey
 # patching for testing purposes.
 class Array
@@ -173,6 +238,7 @@ hand = PokerHand.new([
   Card.new(5, 'Hearts')
 ])
 puts hand.evaluate == 'Full house'
+
 
 hand = PokerHand.new([
   Card.new(10, 'Hearts'),
@@ -236,4 +302,3 @@ hand = PokerHand.new([
   Card.new(3,      'Diamonds')
 ])
 puts hand.evaluate == 'High card'
-=end
