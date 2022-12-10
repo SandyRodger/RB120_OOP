@@ -2,8 +2,8 @@
 
 How does encapsulation relate to the public interface of a class?
 
-	Encapsulation is the idea of limiting the accessibiliy of sections of code to prevent one part of the code unintentionaly effecting another. The public interface is the method name that we call to access the functionality inside it. By intentionaly setting which methods are accessible by which objects we encapsulate pieces of functionality, protecting them from unintended manipulation. 
-	This is often achieved by using the `private`, `protected` and `public` keywords. For example:
+	Encapsulation limits the code available to the public interface of a class.  It does this to prevent one part of the code unintentionaly affecting another. Encapsulation is achieved through creating objects and exposing certain methods to interact with them. In fact the public interface is synonymous with the method names that we call to access the implementation inside them. By intentionaly setting which methods are accessible by which objects we encapsulate pieces of functionality, protecting them from manipulation. One way of doing this is method access control, which is used to expose only the methods we want to be accessible by the public interface of a class.
+	Method access control uses the keywords `private`, `protected` and `public`. Any functionality that is run entirely within the class can be hidden as a private or protected method. For example:
 
 =end
 
@@ -15,19 +15,25 @@ class BankAccount
 	end
 	
 	def withdraw(amount)
-		if amount > self.dollars
+		if amount > dollars
 			puts "insufficient funds"
 		else
-			self.dollars -= amount
-			puts "You have withdrawn #{amount}. Your new balance is #{self.dollars}"
+			dollars -= amount
+			puts "You have withdrawn #{amount}. Your new balance is #{dollars}"
 		end
 	end
 
-	protected
+	private
 
 	attr_accessor :dollars
 end
 
 account_1 = BankAccount.new("Bob", 500)
 account_1.withdraw(300) # => You have withdrawn 300. Your new balance is 200
-p account_1.dollars #protected method, NoMethodError
+#p account_1.dollars #protected method, NoMethodError
+
+=begin
+
+In this example we do not want the public interface to have access to the #dollars getter method, but we do want objects to be able to withdraw money from the account. So we allow the #withdraw method to have access to the #dollars getter method by using the `protected` keyword.
+
+=end
