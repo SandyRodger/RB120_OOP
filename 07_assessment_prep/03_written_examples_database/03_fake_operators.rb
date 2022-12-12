@@ -34,3 +34,5 @@ p bag2.same_total_marbles? bag3 # => true
 =begin
 
 In this code we want to know which bag has more marbles. If we did not override #==, Ruby would call the #== method on the BagOfMarbles object beginning the method lookup path in BagOfMarbles, traversing Object, Kernel and BasicObject and find the built-in BasicObject#== method which compares the object ids of both objects, essentially asking whether the two objects are the same object in memory. By overriding the #== method we specify that the values to be compared are the integers stored in the @total_marbles ivars. Because the #== method is called on an integer Ruby looks first in the Integer class for a #== method and finds it, concluding its search. The Integer#== method compares which number is greater returning a boolean. This fits with the code's design. We could do the same thing with the @colour ivar, which would call the String#== method to compare the strings' length and content.
+
+=end

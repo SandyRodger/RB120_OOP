@@ -1,35 +1,15 @@
-class QuadBike 
-  WHEELS = 4 
-
-  def wheels 
-    WHEELS = 0
+LEGS = 'Not sure'
+class Furniture
+  def how_many_legs
+    LEGS
   end
 end
 
-  WHEELS = 5 
-  
-class Bicycle < QuadBike
-  WHEELS = 2 
+class Chair < Furniture
+end
 
-  def wheels 
-    super + self.class::WHEELS
-  end 
-end 
-  
-class Unicycle < Bicycle
-  WHEELS = 1 
+p Furniture.new.how_many_legs # -> "Not sure"
+# p Furniture::LEGS # -> NameError, uninitialized constant
 
-  def wheels 
-    super
-  end 
-end 
-  
-quad = QuadBike.new 
-bike = Bicycle.new 
-unibike = Unicycle.new 
-  
-p quad.wheels 
-p bike.wheels 
-p unibike.wheels 
-  
-# Without running the code what is the output? 
+p Chair.new.how_many_legs # -> "Not sure"
+ p Chair::LEGS # -> NameError
