@@ -2,7 +2,7 @@
 
 How is Method Access Control implemented in Ruby? Provide examples of when we would use public, protected, and private access modifiers.
 
-Method Access Control is implemented with the three access modifiers: private, protected and public. These are in fact methods. With the exception of #initialize, methods are by default public. Any methods written under an access modifier will be accessible according to its rules. Public methods can be called from outside the class. Private methods can only be called internally, so via other methods in the class. Protected methods are similar to private methods in that they cannot be invoked outside the class. The main difference is that they allow other objects to be passed in. This is demonstrated below.
+Method Access Control is implemented with the three access modifiers: private, protected and public. These are in fact methods. Methods are by default public, with the exception of #initialize, which is always private . Any methods written under an access modifier will be accessible according to its rules. Public methods can be called from outside the class. Private methods can only be called internally, so via other methods in the class. Protected methods are similar to private methods in that they cannot be invoked outside the class. The main difference is that they allow other objects to be passed in. This is demonstrated below.
 
 =end
 
@@ -69,9 +69,7 @@ car.access_private_method # => "I am a private method"
 
 p motorbike.same_total_wheels?(car) # => false
 p motorbike.same_total_wheels?(bicycle) # => true
-# This demonstrates that a common use for protected methods is comparison overriding because we can specify how we want objects to be compared.
+# This demonstrates a common use for protected methods, which is comparison overriding because we can specify how we want objects to be compared.
 
 car.what_am_i # => I am a Volvo
 # This demonstrates that a method adheres to the rules of the access modifier above it, regardless of previous access modifiers.
-
-
