@@ -2,7 +2,9 @@
 
 What are the use cases for self in Ruby, and how does self change based on the scope it is used in? Provide examples.
 
-The `self` keyword is used in classes and modules to specify which object is calling the method. Any time a method is called without an explicit calling object Ruby will prepend `self.`. Depending on the scope in which it is called `self` can refer to a module, a class or a variable. This is demonstrated below.
+The `self` keyword is used in classes and modules to specify which object is calling the method. Any time a method is called without an explicit calling object Ruby will prepend `self.`.
+
+Depending on the scope in which it is called `self` can refer to a module, a class or a variable. This is demonstrated below.
 
 =end
 
@@ -14,6 +16,7 @@ end
 
 class Shape
 	attr_accessor :total_sides
+
 	def initialize(sides)
 		@total_sides = sides
 	end
@@ -22,7 +25,7 @@ class Shape
 		puts "This object is stored as #{self} "
 	end
 
-	def accidental_variable_initialization
+	def accidental_local_variable_initialization
 		total_sides = 5
 	end
 
@@ -41,8 +44,9 @@ Shape.what_am_i? # => This is a Shape class
 # This is a class method, wherein `self` will refer to the class
 square.what_am_i? # => This object is stored as #<Shape:0x00007fc46b9017f8> 
 # This is an instance method, wherein `self` will refer to the instance
+p self
 p square.total_sides # => 4
-p square.accidental_variable_initialization # => 5
+p square.accidental_local_variable_initialization # => 5
 p square.total_sides # => 4
 p square.successful_ivar_reassignment # => 5
 p square.total_sides # => 5

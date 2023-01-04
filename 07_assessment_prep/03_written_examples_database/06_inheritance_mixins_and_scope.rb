@@ -52,9 +52,13 @@ end
 buddy = Dog.new("buddy")
 buddy.set_greeting_in_superclass
 buddy.set_age_in_module
-p buddy.greet # => Here we see that an ivar instantiated in a superclass is visible in the subclass.
-p buddy.age # => Here we see that an ivar instantiated in a module is visible in the class whree it's mixed in.
-p buddy.name_from_superclass # => "buddy" Here we see that an ivar instantiated in a subclass is visible in its superclass
-p buddy.name_from_subclass # => "buddy" Here we see that an ivar instantiated in a class is visible within that class.
-p buddy.name_from_module # => "buddy" Here we see that an ivar instantiated in a subclass is visible in any module mixed into that class.
-
+p buddy.greet # => "hello"
+# Here we see that an ivar instantiated in a superclass is visible in the subclass.
+p buddy.age # => 10
+# Here we see that an ivar instantiated in a module is visible in the class where it's mixed in.
+p buddy.name_from_superclass # => "buddy" 
+# Here we see that an ivar instantiated in a subclass is visible in its superclass.
+p buddy.name_from_subclass # => "buddy"  
+# Here we see that an ivar instantiated in a class is visible within that class.
+p buddy.name_from_module # => "buddy" 
+# Here we see that an ivar instantiated in a subclass is visible in any module mixed into that class.

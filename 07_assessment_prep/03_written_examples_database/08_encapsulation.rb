@@ -34,6 +34,6 @@ account_1.withdraw(300) # => You have withdrawn 300. Your new balance is 200
 
 =begin
 
-In this example we do not want the public interface to have access to the #dollars getter/setter methods, but we do want objects to be able to withdraw money from the account. So we allow the #withdraw method to have access to the #dollars getter method by using the `protected` keyword. The reason why we use `protected`, rather than `private` is in line 21 `self`` cannot see past private, but it can see past protected. So it's treated like another object calling `#dollars` from outside the class.
+In this example we do not want the public interface to have access to the #dollars getter/setter methods, but we do want objects to be able to withdraw money from the account. So we allow the #withdraw method to have access to the #dollars getter method by using the `protected` keyword. The reason why we use `protected`, rather than `private` is in line 21 `self` cannot see past `private`, but it can see past protected. So it's treated like another object calling `#dollars` from outside the class.
 
 =end

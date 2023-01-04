@@ -1,15 +1,15 @@
-LEGS = 'Not sure'
 class Furniture
-  def how_many_legs
-    LEGS
-  end
+	def how_many_legs(description)
+		puts "I can be described as a #{description}"
+	end
 end
 
-class Chair < Furniture
+class Sofa < Furniture
+	def how_many_legs(name)
+		super
+		puts "I am a #{name}"
+	end
 end
 
-p Furniture.new.how_many_legs # -> "Not sure"
-# p Furniture::LEGS # -> NameError, uninitialized constant
-
-p Chair.new.how_many_legs # -> "Not sure"
- p Chair::LEGS # -> NameError
+sofa = Sofa.new
+sofa.how_many_legs("red one")

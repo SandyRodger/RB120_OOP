@@ -26,7 +26,7 @@ Above is output the class object, #<GoodDog:0x00007fcbbf02d630>, without any iva
 
 # => This is Sparky and they are 28 years old.
 
-The other difference between the two code examples is the use of `self.` instead of @ when initializing the two ivars. The functionality is the same in both examples, but the use of @ is better practice because using `self` where it's not strictly neccesary can be confusing.
+The other difference between the two code examples is the use of `self.` instead of @ when initializing the two ivars. The functionality is the same in both examples, but the use of @ is better practice because using `self` where it's not strictly neccesary (such as in initialization) can be confusing.
 =end
 
 class GoodDog

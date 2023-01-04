@@ -17,9 +17,7 @@ p ade # => #<Student:0x00000002a88ef8 @grade=nil, @name="Adewale">
 
 =begin
 
-In this code the `ade` object does not contain a @grade ivar. This is because although the setter method for 
-@Ade
- is present in the attr_accessor method, it is not called. We could instantiate the @grade ivar either by adding it to the initialize method implementation like this:
+In this code the `ade` object does not contain a @grade ivar. This is because although the setter method for `ade` is present in the attr_accessor method, it is not called. We could instantiate the @grade ivar either by adding it to the initialize method implementation like this:
 
   def initialize(name, grade=nil)
     @name = name
