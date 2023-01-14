@@ -35,7 +35,7 @@
 #                   - a shooting accuracy.
 # 										- a weapon
 
-# 4. The default weapon is 'a blaster'. Droids have no weapon. Jedis have a 'light saber and a blaster'.
+# 4. The default weapon is 'a blaster'. Droids have an Ewok sling-shot. Jedis have a 'light saber and a blaster'.
 
 # 5. Shooting accuracy is a percentage and will be determined by a shooting_accuracy_calc method, which should not be publicly accessible. Storm_troopers' shooting accuracy is always 0. Mercenaries score from 80% upwards.
 
@@ -271,7 +271,7 @@ deathstar.display_characters
 
 POST-SUBMISSION WORRIES:
 
-1. If droids don't have weapons, should they really be able to duel?
+1. If droids don't have weapons, should they really be able to duel? Or have a shooting accuracy?
 2. If a Jedi is duelling, is that a #fight? Should it be stored in the fights record?
 3. Should droids/ darth vader be able to disguise as storm troopers?
 4. Should rebels be able to fight imperials? Han solo v. R2D2 / Darth Vader v. Storm trooper
