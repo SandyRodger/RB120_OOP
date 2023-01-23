@@ -2,15 +2,15 @@
 
 1. What is encapsulation in Ruby, and why does it matter? Demonstrate with code.
 
-	S:
+S:
 	
-	Encapsulation is an attempt to protect code, by seperating it into chunks and limiting access to them. These chunks are classes from which objects are created, and modules. This allows large complex structures to be built without different parts unintentionally manipulating each other. It also frees the code writer to think more abstractly about the overall design. 
+Encapsulation is an attempt to protect code, by seperating it into chunks and limiting access to them. These chunks are classes from which objects are created, and modules. This allows large complex structures to be built without different parts unintentionally manipulating each other. It also frees the code writer to think more abstractly about the overall design. 
 
-	P:
+P:
 
-	- Objects encapsulate data
-	- Classes can encapsulate behavior
-	- attr_ methods 
+  - Objects encapsulate data
+  - Classes can encapsulate behavior
+  - attr_ methods 
   - Method Access Control
   - Modules 
   - Inheritance
