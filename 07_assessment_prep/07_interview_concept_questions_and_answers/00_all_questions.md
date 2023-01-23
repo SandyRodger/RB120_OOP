@@ -1,9 +1,9 @@
 [My answer format here](https://github.com/SandyRodger/RB120_OOP/blob/main/07_assessment_prep/07_interview_concept_questions_and_answers/technique.rb)
 1. Encapsulation
-	- What is encapsulation in Ruby, and why does it matter? Demonstrate with code.
-	- What is encapsulation? How is this achieved in Ruby?
-	- How are encapsulation and method access control related?
-	- How does encapsulation relate to the public interface of a class?
+  - What is encapsulation in Ruby, and why does it matter? Demonstrate with code.
+  - What is encapsulation? How is this achieved in Ruby?
+  - How are encapsulation and method access control related?
+  - How does encapsulation relate to the public interface of a class?
 [My answer](https://github.com/SandyRodger/RB120_OOP/blob/main/07_assessment_prep/07_interview_concept_questions_and_answers/01_encapsulation.md)
 2. Polymorphism
   - What is polymorphism? What are the different ways to apply polymorphism in Ruby?
