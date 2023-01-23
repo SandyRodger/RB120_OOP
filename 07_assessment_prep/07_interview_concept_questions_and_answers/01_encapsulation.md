@@ -1,25 +1,25 @@
-https://github.com/gcpinckert/rb120_rb129/blob/main/study_guide/example_code/encapsulation1.rb
+[Ginni's answer was useful here](https://github.com/gcpinckert/rb120_rb129/blob/main/study_guide/example_code/encapsulation1.rb)
 
-1. Encapsulation
-	- What is encapsulation in Ruby, and why does it matter? Demonstrate with code.
-	- What is encapsulation? How is this achieved in Ruby?
-	- How are encapsulation and method access control related?
-	- How does encapsulation relate to the public interface of a class?
+1. What is encapsulation in Ruby, and why does it matter? Demonstrate with code.
 
+	S:
 	
-=end
-# What is encapsulation in Ruby, and why does it matter? Demonstrate with code.
+	Encapsulation is an attempt to protect code, by seperating it into chunks and limiting access to them. These chunks are classes from which objects are created, and modules. This allows large complex structures to be built without different parts unintentionally manipulating each other. It also frees the code writer to think more abstractly about the overall design. 
 
-# GINNI'S ANSWER: 
+	P:
 
-# Encapsulation = hiding different pieces of functionality and within modular "blocks" of code
-  # Objects encapsulate data
-  # Classes can encapsulate behavior - separation of interface and implementation
-  # Method Access Control
-  # Allows us to base problem model on real world paradigms
-  # Another level of abstraction, we can use public interface without worrying about implementation
-  # Another level of abstraction, build "modular" programs
+	- Objects encapsulate data
+	- Classes can encapsulate behavior
+	- attr_ methods 
+  - Method Access Control. 
+	- Modules 
+	- Inheritance
+  - Abstraction: 
+		- base problem model on real world paradigms
+	  - we can use public interface without worrying about implementation
+		- build modular programs
 
+```
 	class Person
 		attr_accessor :name
 		attr_reader :birthday
@@ -96,3 +96,4 @@ https://github.com/gcpinckert/rb120_rb129/blob/main/study_guide/example_code/enc
 	my_pals.show_birthdays
 		# => Bob : Jan 1
 		# Any changes to Person#to_s method do not affect BirthdayTracker#show_birthdays method
+```
