@@ -1,4 +1,4 @@
-[My answer format here (Raspberry Pecan Waffle Desert](https://github.com/SandyRodger/RB120_OOP/blob/main/07_assessment_prep/07_interview_concept_questions_and_answers/technique.rb)
+[My answer format here (Raspberry Pecan Waffle Desert)](https://github.com/SandyRodger/RB120_OOP/blob/main/07_assessment_prep/07_interview_concept_questions_and_answers/technique.rb)
 1. Encapsulation
   - What is encapsulation in Ruby, and why does it matter? Demonstrate with code.
   - What is encapsulation? How is this achieved in Ruby?
