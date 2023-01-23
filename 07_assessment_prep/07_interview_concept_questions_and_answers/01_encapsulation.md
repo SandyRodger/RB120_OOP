@@ -11,9 +11,9 @@
 	- Objects encapsulate data
 	- Classes can encapsulate behavior
 	- attr_ methods 
-  - Method Access Control. 
-	- Modules 
-	- Inheritance
+  - Method Access Control
+  - Modules 
+  - Inheritance
   - Abstraction: 
 		- base problem model on real world paradigms
 	  - we can use public interface without worrying about implementation
