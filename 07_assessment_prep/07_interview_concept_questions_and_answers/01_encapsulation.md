@@ -1,5 +1,3 @@
-=begin
-
 https://github.com/gcpinckert/rb120_rb129/blob/main/study_guide/example_code/encapsulation1.rb
 
 1. Encapsulation
