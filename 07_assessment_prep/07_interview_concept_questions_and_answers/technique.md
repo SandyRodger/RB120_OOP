@@ -1,5 +1,3 @@
-=begin
-
 R: Repeat question.
 S: Give two sentence Summary of topic.
 B: Bullet point what you want to cover.
@@ -9,5 +7,3 @@ W: Walk through examples.
 D: Offer the examiner a digression. 
 
 "RaSpBerry PeCan Waffle Desert"
-
-=end
