@@ -15,9 +15,9 @@
   - Modules 
   - Inheritance
   - Abstraction: 
-		- base problem model on real world paradigms
+	  - base problem model on real world paradigms
 	  - we can use public interface without worrying about implementation
-		- build modular programs
+	  - build modular programs
 
 ```
 	class Person
