@@ -5,10 +5,10 @@ How is Method Access Control implemented in Ruby? Provide examples of when we wo
 Method Access Control is implemented with the three access modifiers: private, protected and public. These are in fact methods. Methods are by default public, with the exception of #initialize, which is always private. Any methods written under an access modifier will be accessible according to its rules. Public methods can be called from outside the class. Private methods can only be called internally, so via other methods in the class. Protected methods are similar to private methods in that they cannot be invoked outside the class. The main difference is that they allow other objects to be passed in. This is demonstrated below.
 
 =end
-=begin
+
 require 'byebug'
 
-class Cyborg
+class BicycleMan
 	attr_reader :wheels
 
 	def initialize(name, wheels = 4)
@@ -56,7 +56,7 @@ end
 car = Vehicle.new("Volvo")
 motorbike = Vehicle.new("Suzuki", 2)
 bicycle = Vehicle.new("Raleigh", 2)
-barry = Cyborg.new('barry')
+barry = BicycleMan.new('barry')
 
 p car.same_total_wheels?(barry) # => false
 p barry.wheels # => 4
@@ -84,14 +84,14 @@ p car.wheels # => 4
 # car.what_am_i # => I am a Volvo
 # # This method is public, which demonstrates that a method adheres to the rules of the access modifier above it, regardless of previous access modifiers.
 
-=end
+
 
 =begin
 
 On Monday 2.1.23 Olly and I talked about the nature of the 'protected' access modifier. Olly was able to prove (?) that protected methods do not allow objects from other classes to be passed in. But I thought they could, as I do below. Now I can't manage to recreate his example. Something to do with nipples. 
 
 =end
-
+=begin
 class BankAccount
 	attr_reader :amount 
 
@@ -126,3 +126,4 @@ end
 bank_account = BankAccount.new('John', 2000)
 bitcoin_account = BitcoinAccount.new('John', 3000)
 p bitcoin_account.has_more_than?(bank_account) # => true
+=end

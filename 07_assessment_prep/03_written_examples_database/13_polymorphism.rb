@@ -74,6 +74,8 @@ In this code we pass three objects of unrelated classes to a fourth class. Each 
 
 =end
 
+# Duck typing
+
 module Flyable
 	def fly
 		puts "I can fly"
