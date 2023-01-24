@@ -1,4 +1,4 @@
-[My answer format here ("Read Short Books to Pass Cold Winter Days")](https://github.com/SandyRodger/RB120_OOP/blob/main/07_assessment_prep/07_interview_concept_questions_and_answers/technique.md)
+[My answer format here ("Rich Single Brits Prefer Cuddling WIthout Discussion")](https://github.com/SandyRodger/RB120_OOP/blob/main/07_assessment_prep/07_interview_concept_questions_and_answers/technique.md)
 1. Encapsulation
   - What is encapsulation in Ruby, and why does it matter? Demonstrate with code.
   - What is encapsulation? How is this achieved in Ruby?
@@ -10,7 +10,8 @@
 2. Polymorphism
   - What is polymorphism? What are the different ways to apply polymorphism in Ruby?
   - What is polymorphism in Ruby? How do we implement it in code?
-  -[my answer](https://github.com/SandyRodger/RB120_OOP/blob/main/07_assessment_prep/07_interview_concept_questions_and_answers/02_polymorphism.md)
+  
+  [my answer](https://github.com/SandyRodger/RB120_OOP/blob/main/07_assessment_prep/07_interview_concept_questions_and_answers/02_polymorphism.md)
   
 3. Method Access Control
   - How do we control access to methods in Ruby?
@@ -19,6 +20,9 @@
   - What are accessor methods? Provide an example.
   - What is method access control?
   - How are encapsulation and method access control related?
+
+[my answer](https://github.com/SandyRodger/RB120_OOP/blob/main/07_assessment_prep/07_interview_concept_questions_and_answers/03_method_access_control.md)
+
 4. Inheritance
   - What is class inheritance? How does this work in Ruby?
   - When are Modules used? What is interface inheritance? What is multiple inheritance?
