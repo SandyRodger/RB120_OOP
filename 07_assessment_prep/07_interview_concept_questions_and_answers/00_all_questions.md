@@ -19,6 +19,8 @@
   - What are accessor methods? Provide an example.
   - What is method access control?
   - How are encapsulation and method access control related?
+
+[my answer](https://github.com/SandyRodger/RB120_OOP/blob/main/07_assessment_prep/07_interview_concept_questions_and_answers/03_method_access_control.md)
 4. Inheritance
   - What is class inheritance? How does this work in Ruby?
   - When are Modules used? What is interface inheritance? What is multiple inheritance?
