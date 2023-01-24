@@ -49,31 +49,29 @@ class Bird
 	end
 end
 
-class Rhino
+class WashingMachine
 	def move
-		puts "I charge and rampage"
+		puts "I whirr and shudder"
 	end
 end
 
-class Dog
+class Planet
 	def move
-		puts "I run and scratch"
+		puts "I orbit and spin"
 	end
 end
 
-class Animals
-	def self.print_movements(array)
-		array.each {|animal| animal.move}
-	end
+def print_movements(array)
+	array.each {|object| object.move}
 end
 
-Animals.print_movements([Bird.new, Dog.new, Rhino.new]) 
+print_movements([Bird.new, WashingMachine.new, Planet.new]) 
 
 # => I fly and hop
-# => I run and scratch
-# => I charge and rampage
+# => I whirr and shudder
+# => I orbit and spin
 
-# Duck typing
+# Interface inheritance
 
 module Flyable
 	def fly
@@ -99,5 +97,12 @@ end
 # => I can fly
 ```
 
-W:
-D:
+W: 
+
+We use a module to mix in behaviors that apply to more than one class and are not easily modeled around a formal heirarchy.
+We use class inheritance to model behaviours that are more general in a superclass and more specific in subclasses.
+We use Duck typing to give the same behaviour to completely unrelated classes. 
+Polymorphism DRYs up our code by avoiding repeating the same definition multiple times.
+
+
+D: Would you like me to talk about any of these points further?
