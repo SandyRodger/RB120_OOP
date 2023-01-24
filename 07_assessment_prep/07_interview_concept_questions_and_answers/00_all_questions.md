@@ -10,6 +10,8 @@
 2. Polymorphism
   - What is polymorphism? What are the different ways to apply polymorphism in Ruby?
   - What is polymorphism in Ruby? How do we implement it in code?
+  -[my answer](https://github.com/SandyRodger/RB120_OOP/blob/main/07_assessment_prep/07_interview_concept_questions_and_answers/02_polymorphism.md)
+  
 3. Method Access Control
   - How do we control access to methods in Ruby?
   - What is the attr_accessor method, and why wouldn’t we want to just add attr_accessor methods for every instance variable in our class? Give an example.
