@@ -73,3 +73,23 @@ Animals.print_movements([Bird.new, Dog.new, Rhino.new])
 In this code we pass three objects of unrelated classes to a fourth class. Each object's class has a #move method and the #Animal::print_movements method calls a #move method on each object passed in. The result is that Ruby implements each object's unique #move method.
 
 =end
+
+module Flyable
+	def fly
+		puts "I can fly"
+	end
+end
+
+class Plane
+	include Flyable
+end
+
+class Crow
+	include Flyable
+end
+
+class Superman
+	include Flyable
+end
+
+[Plane.new, Crow.new, Superman.new].each {|obj|obj.fly}
