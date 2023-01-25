@@ -29,6 +29,9 @@
   - How does inheritance work in Ruby? When would inheritance be appropriate?
   - How do class inheritance and mixing in modules affect instance variable scope? Give an example.
   - When should we use class inheritance vs. interface inheritance?
+
+[my answer](https://github.com/SandyRodger/RB120_OOP/blob/main/07_assessment_prep/07_interview_concept_questions_and_answers/04_inheritance.md)
+
 5. Getter / Setter methods
   - What are getter and setter methods? Provide an example.
   - What are getter and setter methods in Ruby? How do we create them?
