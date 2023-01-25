@@ -6,14 +6,14 @@ S: Inheritance is when classes are granted access to methods in other classes or
 
 B:
 
-# Class Inheritance 
-  # Superclasses and Subclasses
-  # Inherited general behaviors
-  # Overriding with more specific behaviors
-# Interface Inheritance
-  # Ruby's answer to multiple inheritance
-  # Mixin Modules
-  # has_a vs is_a
+Class Inheritance 
+Superclasses and Subclasses
+Inherited general behaviors
+Overriding with more specific behaviors
+Interface Inheritance
+Ruby's answer to multiple inheritance
+Mixin Modules
+has_a vs is_a
 
 P: I will now write out some code to demonstrate this
 
