@@ -37,6 +37,9 @@
   - What are getter and setter methods in Ruby? How do we create them?
   - Give an example of when it would make sense to manually write a custom getter method vs. using attr_reader.
   - Give an example of when it would make sense to manually write a custom getter method vs. using attr_reader.
+
+[my answer](https://github.com/SandyRodger/RB120_OOP/blob/main/07_assessment_prep/07_interview_concept_questions_and_answers/05_getter_setter_methods.md)
+
 6. Instance v. Class methods
   - What is an instance method? Provide an example.
   - What’s the difference between instance and class methods?
