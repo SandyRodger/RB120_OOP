@@ -33,17 +33,17 @@ class Person
 	def age=(new_age)
 		puts "#{new_age - age} years have passed"
 		@age = new_age
-		"BANG"
+		"BANG" # => never gets output/returned/saved
 	end
 end
 
 barry = Person.new("barry", 33)
-# p barry.name
-# barry.name = "frank"
-# p barry.name
+p barry.name # => "This person's name is Barry"
+barry.name = "frank"
+p barry.name # => "This person's name is Frank"
 
-p barry.age = 56
-# p barry.age
+p barry.age = 56 #=> 23 years have passed"
+p barry.age # => 56
 ```
 W:
 D:
@@ -53,6 +53,6 @@ DON'T FORGET TO MENTION:
 - it is better to refer to and manipulate ivars within the class via getter and setter methods because it makes the code more flexible and easier to maintain. 
 BECAUSE
 	- changes need only be made to the getter/setter method
-	- it allows uninitiated variables to be caught, because an uninitiates ivar will return nil, but an uninitiated local var will raise an exception.
-- We can call getter methods without an explicit caller, but setter methods should be prepended with `self.` because local variable initialization uses the syntax var_name = assigned value, so in irder to disambiguate for Ruby that we are actually calling the setter method we specify the calling object as `self` and ruby knows that it is a method we are calling, not a new variable. 
+	- it allows uninitiated variables to be caught, because an uninitiated ivar will return nil, but an uninitiated local var will raise an exception.
+- We can call getter methods without an explicit caller, but setter methods should be prepended with `self.` because local variable initialization uses the syntax `var_name = assigned_value`, so in order to disambiguate for Ruby that we are actually calling the setter method we specify the calling object as `self` and ruby knows that it is a method we are calling, not a new variable. 
 - Setter methods always return the value passed in.
