@@ -15,7 +15,7 @@ B: In talking about setter/getter methods I will cover these points:
 P:
 
 C:
-```
+```ruby
 class Person
 	attr_accessor :name
 	attr_writer :age
