@@ -1,28 +1,30 @@
-class Person
-	attr_accessor :name
-	attr_writer :age
-	attr_reader :age
+VAL = 'Main'
 
-	def initialize(name, age)
-		@name = name
-		@age = age
-	end
+module Foo
+  VAL = 'Foo'
 
-	def name
-		"This person's name is #{@name.capitalize}"
-	end
+  class Bar
+    def value1
+      VAL
+    end
+  end
+end
 
-	def age=(new_age)
-		puts "#{new_age - age} years have passed"
-		@age = new_age
-		"BANG"
+p Foo::Bar.new.value1 # Foo
+
+class Foo::Bar
+  VAL = 'Bar'
+  def value2
+    VAL
+  end
+end
+
+class Foo::Bar
+	def value3
+		puts "yes"
 	end
 end
 
-barry = Person.new("barry", 33)
-# p barry.name
-# barry.name = "frank"
-# p barry.name
-
-p barry.age = 56
-# p barry.age
+p Foo::Bar.new.value2 # Bar - Outputs 'Main' without Line 16
+p Foo::Bar.new.value1 # Bar - Why?
+Foo::Bar.new.value3
