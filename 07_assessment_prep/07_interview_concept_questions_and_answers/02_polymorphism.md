@@ -16,7 +16,7 @@ duck typing
 P: I'm now going to write three examples. One is for workers and the other from animals, to demonstate the 3 types of polymorphism.
 
 C:
-```
+``` Ruby
 # interface inheritance
 
 class Worker
