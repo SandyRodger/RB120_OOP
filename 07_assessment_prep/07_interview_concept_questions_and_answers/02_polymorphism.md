@@ -4,7 +4,7 @@ R: What is polymorphism? What are the different ways to apply polymorphism in Ru
 
 S:
 
-	Polymorphism is the ability for objects of different types to respond to the same method call with their own implementation. This is usually done in one of three ways: class inheritance, interface inheritance, and duck-typing.
+Polymorphism is the ability for objects of different types to respond to the same method call with their own implementation. This is usually done in one of three ways: class inheritance, interface inheritance, and duck-typing.
 
 B: (So I'm going to write down some points I'd like to cover)
 
