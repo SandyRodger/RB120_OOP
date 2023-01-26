@@ -152,3 +152,59 @@ puts two_a.a_public_method(three_a) # => Sender: Object Two A / Receiver: Object
 puts three_a.a_public_method(three_b) # => Sender: Object Three A / Receiver: Object Three B
 ```
 >>>>>>> Stashed changes
+
+Protected Issue: class methods cannot access instant methods within them, even if a instance is passed in... ?
+```ruby
+class ClassA
+  def initialize
+    @protected_variable = "Am I available?"
+  end
+
+  def self.public_method(object)
+    object.protected_variable
+  end
+
+  protected
+
+  attr_reader :protected_variable
+end
+
+puts ClassA.public_method(ClassA.new) # => protected method error, 
+# BUT it does work without the protected.
+# AND it does work as an instance method.
+```
+
+Example 2:
+
+```ruby
+class ClassA
+  def public_method(object)
+    puts "instance method:", self.class, object.is_a?(self.class)
+  end
+
+  def self.public_method(object)
+    puts "class method:", self.class, object.is_a?(self.class)
+  end
+end
+
+a = ClassA.new
+a.public_method(a)
+puts
+ClassA.public_method(a)
+
+# instance method:
+# ClassA
+# true
+
+# class method:
+# Class
+# false
+
+```
+Pete Hanson says:
+
+What's important here is that self.public_method shows that the type of self is Class, and that object is not an instance of Class. However, in the instance method, the type of self is ClassA, and object is an instance of ClassA
+
+What I say is:
+
+When it's a class method you can't access protected with an instance argument.
