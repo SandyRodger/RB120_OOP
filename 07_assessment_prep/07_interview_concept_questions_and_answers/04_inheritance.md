@@ -19,7 +19,7 @@ P: I will now write out some code to demonstrate this
 
 C:
 
-```
+``` Ruby
 module Transport
 	def take_the_bus
 		"In the morning I, a #{self.class}, take the bus"
