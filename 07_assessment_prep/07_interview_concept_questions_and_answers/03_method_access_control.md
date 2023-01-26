@@ -15,7 +15,7 @@ Protected
 P: I will talk while I code showing hiow the different Method access modifiers work.
 
 C:
-```
+``` Ruby
 class Person
 	def initialize(name)
 		@name = name
@@ -60,6 +60,6 @@ W:
 
 D: Shall I talk about what happens when you pass an object of a different class in to be compared in a protected method?
 
-# DON"T FORGET TO MENTION:
+DON"T FORGET TO MENTION:
 
 - ? 
