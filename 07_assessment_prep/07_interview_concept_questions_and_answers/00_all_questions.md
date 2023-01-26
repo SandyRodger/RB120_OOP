@@ -126,4 +126,4 @@
   - What are class variables? Provide an example.
   - What’s the difference between instance and class variables?
 
-30. Instance Variables
+30. [Instance Variables](https://github.com/SandyRodger/RB120_OOP/blob/main/07_assessment_prep/07_interview_concept_questions_and_answers/30_instance_variables.md)
