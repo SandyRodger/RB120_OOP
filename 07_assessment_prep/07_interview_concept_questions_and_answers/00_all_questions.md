@@ -36,17 +36,17 @@
   - What are getter and setter methods? Provide an example.
   - What are getter and setter methods in Ruby? How do we create them?
   - Give an example of when it would make sense to manually write a custom getter method vs. using attr_reader.
-  - Give an example of when it would make sense to manually write a custom getter method vs. using attr_reader.
-
-[my answer](https://github.com/SandyRodger/RB120_OOP/blob/main/07_assessment_prep/07_interview_concept_questions_and_answers/05_getter_setter_methods.md)
+  - Give an example of when it would make sense to manually write a custom setter method vs. using attr_writer.
 
 6. Instance v. Class methods
   - What is an instance method? Provide an example.
   - What’s the difference between instance and class methods?
   - What are class methods? Provide an example.
+
 7. Self
   - What is self? Demonstrate how it is used.
   - What are the use cases for self in Ruby, and how does self change based on the scope it is used in? Provide examples.
+	
 8. Modules
   - What are modules? When is it appropriate to use them?
   - How do class inheritance and mixing in modules affect instance variable scope? Give an example.
@@ -96,7 +96,7 @@
   - When should we use class inheritance vs. interface inheritance?
 23. Duck typing
   - What is duck typing?
-26. Constant variables
+26. Constant variables and their lookup paths
   - What are constant variables? Provide an example.
 27. Namespacing
   - What is namespacing? When is using namespacing beneficial?
