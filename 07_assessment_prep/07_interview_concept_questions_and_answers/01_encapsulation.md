@@ -23,7 +23,7 @@ P: I'm now going to create a two classes and a module, which will model how a ba
 
 C:
 
-```
+``` Ruby
 module ConvertToPounds
 	def convert_to_pounds(dollars)
 		puts "When converted $#{dollars} = £#{(dollars * 1.16).round(2)}"
