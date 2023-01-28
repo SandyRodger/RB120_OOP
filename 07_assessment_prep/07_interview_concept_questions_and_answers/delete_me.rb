@@ -1,21 +1,15 @@
-class Animal
+array = [1, 2, 3, 4, 5]
 
-private
-	def self.what
-		"Animal"
+# array.select { |num| num.odd? }       # => [1, 3, 5]
+# array.select { |num| puts num }       # => [], because "puts num" returns nil and evaluates to false
+# array.select { |num| num + 1 }        # => [1, 2, 3, 4, 5], because "num + 1" evaluates to true
+
+def select(arr)
+	arr.each_with_object([]) do |n, output| 
+		output.push(n) if yield(n)
 	end
 end
 
-class Machine < Animal
-
-	def self.compare(other)
-		self.what == other.what
-	end
-
-private
-	def self.what
-		"Machine"
-	end
-end
-
-p Machine.compare(Animal)
+p select(array) { |num| num.odd? }      # => [1, 3, 5]
+p select(array) { |num| puts num }      # => [], because "puts num" returns nil and evaluates to false
+p select(array) { |num| num + 1 }       # => [1, 2, 3, 4, 5], because "num + 1" evaluates to true
